@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>spigot - Free CSS Template by ZyPOP</title>
+     <link rel="stylesheet" href="static/css/styles.css" type="text/css" />
+    <link rel="stylesheet" href="static/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="static/css/mystyle.css" type="text/css" />
+    <style>
+        .search-box {
+            background-color: #f8f9f1 !important;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<!-- Image and text -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <a class="navbar-brand mb-0 h3" href="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BestFinance</a>
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="home.html">Home </a>
+                <a class="nav-item nav-link active" href="product?method=showProductList&type=WearableTechnology">Loans</a>
+                <a class="nav-item nav-link active" href="product?method=showProductList&type=WearableTechnology">Insurances</a>
+                <a class="nav-item nav-link active" href="product?method=showProductList&type=WearableTechnology">Investments</a>
+             </div>
+        </div>
+    </div>
+    <a href="cart?method=toCartPage" class="nav-item nav-link active">
+        Apply
+        <sub>(3)</sub>
+    </a>
+    <span class="nav-greeting-dark">Hi There! Welcome.</span>
+    <a class='btn btn-outline-dark my-2 my-sm-2 pull-right' href='login.html'
+       role='button'>Sign in</a>
+
+</nav>
+<div class="search-box">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 no-padding">
+            <input
+                    type="text"
+                    id="searchId"
+                    placeholder="Search product"
+                    onkeyup="doCompletion()"
+                    class="search-input">
+            <div id="auto-row">
+                <table
+                        id="complete-table"
+                        class="gridtable"
+                        style="position: absolute; width: 100%"></table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .column {
+        float: left;
+        width: 33.33%;
+        padding: 5px;
+    }
+
+    /* Clearfix (clear floats) */
+    .row::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+</style>
+
+<div id="body">
+    <section id="content">
+        <center><h2 class="form-signin-heading" th:text="${type}"></h2></center>
+        <div class="row row-space" th:each="product : ${productlist}">
+            <div class="col-xs-3 img-block">
+                <a href="#"><img src="static/imagesNew/happymoney.jpg" class="img-thumbnail"></a>
+            </div>
+            <div class="col-xs-6 divide-block">
+                <h4 class=""><a href="#" th:text="${product.model}">Happy Money</a></h4>
+                <label class="control-label" th:text="4.5/5">Rating: </label>
+                <label class="info-label">4.5/5</label> <br>
+                <label class="control-label" th:text="4.5/5">Loan amount: </label>
+                <label class="info-label">$5,000-$100,000</label> <br>
+                <label class="control-label">Min. cretit score: </label>
+                <label class="info-label"  th:text="${product.discount}">560 </label> <br>
+                <label class="availibility" >Currently Available</label>
+            </div>
+            <div class="col-xs-1 space-price-block ">
+                <h3 class="price space"  th:text="${product.price}">$49.99</h3>
+                <form action="apply.html" method="post">
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="hidden" name="productid" th:value="${product.productid}">
+                                <button class="btn btn-outline-dark" type="submit">Apply</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a class="btn btn-link" role="button" th:href="@{/product(method='toViewProductPage',id=${product.productid})}">View details</a>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <div class="row row-space" th:each="product : ${productlist}">
+            <div class="col-xs-3 img-block">
+                <a href="#"><img src="static/imagesNew/upgrade_new.jpg" class="img-thumbnail"></a>
+            </div>
+            <div class="col-xs-6 divide-block">
+                <h4 class=""><a href="#" th:text="${product.model}">upgrade</a></h4>
+                <label class="control-label" th:text="5.0/5">Rating: </label>
+                <label class="info-label">5.0/5</label> <br>
+                <label class="control-label" th:text="4.5/5">Loan amount: </label>
+                <label class="info-label">$1,000-$50,000</label> <br>
+                <label class="control-label">Min. cretit score: </label>
+                <label class="info-label"  th:text="${product.discount}">660 </label> <br>
+                <label class="availibility" >Currently Available</label>
+            </div>
+            <div class="col-xs-1 space-price-block ">
+                <h3 class="price space"  th:text="${product.price}">$59.99</h3>
+                <form action="apply.html" method="post">
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="hidden" name="productid" th:value="${product.productid}">
+                                <button class="btn btn-outline-dark" type="submit">Apply</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a class="btn btn-link" role="button" href="productdetail.html">View details</a>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+         </div>
+        </div>
+        <hr class="draw-line">
+    </section>
+</div>
+<style>
+    .sidebar h4 {
+        padding-bottom: 0;
+        font-size: 18px;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: bold;
+        padding: 7px 7px;
+        /*background-color: #343a40 !important;*/
+        background-color: darkblue !important;
+        text-align: center;
+        border-radius: 15px;
+    }
+    a {
+        color: #212529;
+        background-color: transparent;
+    }
+    .sidebar ul {
+        width: 250px;
+    }
+    .sidebar li ul li a:active {
+        background-color: #007bff;
+        border-radius: 20px;
+    }
+    .sidebar li ul li a:hover {
+        background-color: lightblue;
+        border-radius: 20px;
+    }
+</style>
+
+<aside id="aside" class="sidebar" >
+    <ul>
+        <li>
+            <h4>USER CONTROL</h4>
+            <ul>
+                <li><a href="trend?method=toTrendPage">View Applies</a></li>
+            </ul>
+        </li>
+        <li>
+            <h4>Trending</h4>
+            <ul>
+                <li><a href="trend?method=toTrendPage">Trending</a></li>
+            </ul>
+        </li>
+        <li>
+            <h4>Loans</h4>
+            <ul>
+                <li><a href="product?method=showProductList&type=WearableTechnology&&manufacturer=FitnessWatches">Personal Loans</a></li>
+                <li><a href="product?method=showProductList&type=WearableTechnology&&manufacturer=SmartWatches">Bussiness Loans</a></li>
+                <li><a href="product?method=showProductList&type=WearableTechnology&&manufacturer=SmartWatches">Student Loans</a></li>
+            </ul>
+        </li>
+        <li>
+            <h4>Insurances</h4>
+            <ul>
+                <li><a href="product?method=showProductList&type=WearableTechnology&&manufacturer=FitnessWatches">Life Insurence</a></li>
+                <li><a href="product?method=showProductList&type=WearableTechnology&&manufacturer=SmartWatches">Health Insurence</a></li>
+            </ul>
+        </li>
+        <li>
+            <h4>Investments</h4>
+            <ul>
+                <li><a href="product?method=showProductList&type=WearableTechnology&&manufacturer=FitnessWatches">Stocks</a></li>
+                <li><a href="product?method=showProductList&type=WearableTechnology&&manufacturer=SmartWatches">cryptocurrency services</a></li>
+            </ul>
+        </li>
+</aside>
+<div class="clear"></div>
+<footer>
+    <div class="footer-bottom">
+        <p>
+            &copy; BestFinance 2022. <a href="/BestFinance/">CSP 584 Project</a> by
+            Group | 18
+        </p>
+    </div>
+</footer>
+<script src="static/script/jquery.min.js"></script>
+<script src="static/script/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+    $('.carousel').carousel();
+    $("select#delivery").change(function(){
+        if ($(this).val() === '1') {
+            $("#picklocation").prop("hidden","")
+        } else {
+            $("#picklocation").attr("hidden","hidden")
+        }
+    });
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>header</title>
+    <base th:href="@{/}"/>
+</head>
+<div th:fragment="left">
+
+    <div th:if="${session.loginUser == null}">
+        <aside id="aside" class="sidebar" >
+            <ul>
+                <li>
+                    <h4>TRENDING</h4>
+                    <ul>
+                        <li><a href="trend?method=toTrendPage">Trending</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h4>LOANS</h4>
+                    <ul>
+                        <li><a href="product?method=showProductList&type=Loans&&manufacturer=PersonalLoans">Personal Loans</a></li>
+                        <li><a href="product?method=showProductList&type=Loans&&manufacturer=BussinessLoans">Business Loans</a></li>
+                        <li><a href="product?method=showProductList&type=Loans&&manufacturer=StudentLoans">Student Loans</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h4>INSURANCES</h4>
+                    <ul>
+                        <li><a href="product?method=showInsInvProductList&type=Insurances&&manufacturer=LifeInsurance">Life Insurance</a></li>
+                        <li><a href="product?method=showInsInvProductList&type=Insurances&&manufacturer=HealthInsurance">Health Insurance</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h4>INVESTMENTS</h4>
+                    <ul>
+                        <li><a href="product?method=showInsInvProductList&type=Investments&&manufacturer=Stocks">Stocks</a></li>
+                        <li><a href="product?method=showInsInvProductList&type=Investments&&manufacturer=Cryptocurrency">Cryptocurrency</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+    </div>
+
+    <div th:unless="${session.loginUser == null}">
+        <div th:switch="${session.loginUser.role}">
+            <aside class="sidebar" th:case=0>
+                <ul>
+                    <x></x>
+                    <li>
+                        <h4>USER CONTROL</h4>
+                        <ul>
+                            <li><a href="order?method=toVieworderPage">View Applies</a></li>
+                        </ul>
+                    </li>
+                    <y></y>
+                    <li>
+                        <h4>TRENDING</h4>
+                        <ul>
+                            <li><a href="trend?method=toTrendPage">Trending</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>LOANS</h4>
+                        <ul>
+                            <li><a href="product?method=showProductList&type=Loans&&manufacturer=PersonalLoans">Personal Loans</a></li>
+                            <li><a href="product?method=showProductList&type=Loans&&manufacturer=BussinessLoans">Business Loans</a></li>
+                            <li><a href="product?method=showProductList&type=Loans&&manufacturer=StudentLoans">Student Loans</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>INSURANCES</h4>
+                        <ul>
+                            <li><a href="product?method=showInsInvProductList&type=Insurances&&manufacturer=LifeInsurance">Life Insurance</a></li>
+                            <li><a href="product?method=showInsInvProductList&type=Insurances&&manufacturer=HealthInsurance">Health Insurance</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>INVESTMENTS</h4>
+                        <ul>
+                            <li><a href="product?method=showInsInvProductList&type=Investments&&manufacturer=Stocks">Stocks</a></li>
+                            <li><a href="product?method=showInsInvProductList&type=Investments&&manufacturer=Cryptocurrency">Cryptocurrency</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </aside>
+
+            <aside class="sidebar" th:case=1>
+                <ul>
+                    <x></x>
+                    <li>
+                        <h4>USER CONTROL</h4>
+                        <ul>
+                            <li><a href="product?method=toAddProductPage">Add Product</a></li>
+                            <li><a href="sales?method=showSalesReport">Sales Report</a></li>
+                        </ul>
+                    </li>
+                    <y></y>
+                    <li>
+                        <h4>TRENDING</h4>
+                        <ul>
+                            <li><a href="trend?method=toTrendPage">Trending</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>LOANS</h4>
+                        <ul>
+                            <li><a href="product?method=showProductList&type=Loans&&manufacturer=PersonalLoans">Personal Loans</a></li>
+                            <li><a href="product?method=showProductList&type=Loans&&manufacturer=BussinessLoans">Business Loans</a></li>
+                            <li><a href="product?method=showProductList&type=Loans&&manufacturer=StudentLoans">Student Loans</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>INSURANCES</h4>
+                        <ul>
+                            <li><a href="product?method=showInsInvProductList&type=Insurances&&manufacturer=LifeInsurance">Life Insurance</a></li>
+                            <li><a href="product?method=showInsInvProductList&type=Insurances&&manufacturer=HealthInsurance">Health Insurance</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>INVESTMENTS</h4>
+                        <ul>
+                            <li><a href="product?method=showInsInvProductList&type=Investments&&manufacturer=Stocks">Stocks</a></li>
+                            <li><a href="product?method=showInsInvProductList&type=Investments&&manufacturer=Cryptocurrency">Cryptocurrency</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </aside>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+</div>
+</body>
+</html>

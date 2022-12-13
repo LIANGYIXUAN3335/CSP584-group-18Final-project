@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Best Finance</title>
+    <base th:href="@{/}" href="/AS2/"/>
+    <link rel="stylesheet" href="static/css/styles.css" type="text/css" />
+    <link rel="stylesheet" href="static/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="static/css/mystyle.css" type="text/css" />
+</head>
+
+<body>
+<!-- Image and text -->
+<div id="header" th:include="header :: header"></div>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .column {
+        float: left;
+        width: 33.33%;
+        padding: 5px;
+    }
+
+    /* Clearfix (clear floats) */
+    .row::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+</style>
+<div id='body'>
+    <section id='content'>
+    <center>
+        <h3 th:text="@{${'Order with orderID: '+orderid}}+' Placed'"></h3>
+        <h5 th:text="@{${'Delivery Data: '+createDate}}"></h5>
+    </center>
+    </section>
+</div>
+<style>
+    .sidebar h4 {
+        padding-bottom: 0;
+        font-size: 18px;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: bold;
+        padding: 7px 7px;
+        /*background-color: #343a40 !important;*/
+        background-color: darkblue !important;
+        text-align: center;
+        border-radius: 15px;
+    }
+    a {
+        color: #212529;
+        background-color: transparent;
+    }
+    .sidebar ul {
+        width: 250px;
+    }
+    .sidebar li ul li a:active {
+        background-color: #007bff;
+        border-radius: 20px;
+    }
+    .sidebar li ul li a:hover {
+        background-color: lightblue;
+        border-radius: 20px;
+    }
+</style>
+<div id="left" th:include="left :: left"></div>
+
+<div id="footer" th:include="footer :: footer"></div>
+
+<script src="static/script/jquery.min.js"></script>
+<script src="static/script/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $('.carousel').carousel();
+    $("select#delivery").change(function(){
+        if ($(this).val() === '1') {
+            $("#picklocation").prop("hidden","")
+        } else {
+            $("#picklocation").attr("hidden","hidden")
+        }
+    });
+</script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Best Finance</title>
+    <base th:href="@{/}" href="/bestfinance/"/>
+    <link rel="stylesheet" href="static/css/styles.css" type="text/css" />
+    <link rel="stylesheet" href="static/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="static/css/mystyle.css" type="text/css" />
+</head>
+
+<body>
+<!-- Image and text -->
+<div id="header" th:include="header :: header"></div>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .column {
+        float: left;
+        width: 33.33%;
+        padding: 5px;
+    }
+
+    /* Clearfix (clear floats) */
+    .row::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+</style>
+<div id="body">
+    <section id="content">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="container">
+                    <form class="form-signin" action="user?method=doUpdate" method="post">
+<!--                        <input type="hidden" name="method" value="doRegister"/>-->
+                        <center><h2 class="form-signin-heading">My Profile</h2></center>
+                        <label for="fname" class="dark">First Name</label>
+                        <input type="hidden" name="userid" th:value="${session.loginUser.userid}"/>
+                        <input th:value="${user.fname}" name="fname" type="text" id="fname" class="form-control" placeholder="First Name" required="" autofocus="">
+                        <label for="lname" class="dark">Last Name</label>
+                        <input th:value="${user.lname}" name="lname" type="text" id="lname" class="form-control" placeholder="Last Name" required="">
+
+                        <label for="inputEmail" class="dark">Email address</label>
+                        <input th:value="${user.email}" name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="">
+
+                        <label for="mno" class="dark">Mobile Number</label>
+                        <input th:value="${user.mno}" name="mno" type="text" id="mno" class="form-control" placeholder="Mobile Number" required="">
+
+                        <label for="inputPassword" class="dark">Password</label>
+                        <input name="password" th:value="${user.password}" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+
+                        <div class="form-group"><label for="preference" class="dark">Financial Preference</label>
+                            <div class="col-xs-5 selectContainer">
+                                <select class="form-control" name="preference" id="preference">
+                                    <option th:text="${user.preference}">Choose your preference</option>
+                                    <option value="loan">Loan</option>
+                                    <option value="insurance">Insurance</option>
+                                    <option value="investment">Investment</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Update</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </section>
+</div>
+<style>
+    .sidebar h4 {
+        padding-bottom: 0;
+        font-size: 18px;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: bold;
+        padding: 7px 7px;
+        /*background-color: #343a40 !important;*/
+        background-color: darkblue !important;
+        text-align: center;
+        border-radius: 15px;
+    }
+    a {
+        color: #212529;
+        background-color: transparent;
+    }
+    .sidebar ul {
+        width: 250px;
+    }
+    .sidebar li ul li a:active {
+        background-color: #007bff;
+        border-radius: 20px;
+    }
+    .sidebar li ul li a:hover {
+        background-color: lightblue;
+        border-radius: 20px;
+    }
+</style>
+<div id="left" th:include="left :: left"></div>
+
+<div id="footer" th:include="footer :: footer"></div>
+
+<script src="static/script/jquery.min.js"></script>
+<script src="static/script/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $('.carousel').carousel();
+    $("select#delivery").change(function(){
+        if ($(this).val() === '1') {
+            $("#picklocation").prop("hidden","")
+        } else {
+            $("#picklocation").attr("hidden","hidden")
+        }
+    });
+</script>
+
+</body>
+
+</html>
+

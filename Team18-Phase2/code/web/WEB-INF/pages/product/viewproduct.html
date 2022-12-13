@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Best Finance</title>
+    <base th:href="@{/}" href="/bestfinance/"/>
+    <link rel="stylesheet" href="static/css/styles.css" type="text/css" />
+    <link rel="stylesheet" href="static/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="static/css/mystyle.css" type="text/css" />
+</head>
+
+<body>
+<!-- Image and text -->
+<div id="header" th:include="header :: header"></div>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .column {
+        float: left;
+        width: 33.33%;
+        padding: 5px;
+    }
+
+    /* Clearfix (clear floats) */
+    .row::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+</style>
+
+<div id="body">
+    <section id="content">
+        <div class="row row-space">
+            <div class="col-xs-3 img-block">
+                <a href="#"><img th:src="@{${'static/'+product.image}}" class="img-thumbnail"></a>
+            </div>
+            <div th:if="${product.type} eq 'Loans'" class="col-xs-6 divide-block">
+                <h4 class=""><a href="#" th:text="${product.name}">Amazon - Echo Dot (3rd Gen) - Smart Speaker with Alexa - Charcoal</a></h4>
+                <label class="control-label">Rating: </label>
+                <label class="info-label" th:text="${product.rating}">Amazon</label>
+
+                <x class="space"></x> |<label  class="control-label space">Loan amount: </label>
+                <label class="info-label" th:text="${product.loanamount}">New</label> <br>
+                <label class="control-label">Min. cretit score: </label>
+                <label class="info-label" th:text="${product.creditscore}">10.0% </label> <br>
+
+                <label class="control-label">Currently Available: </label>
+                <label class="info-label" th:text="${product.quantity}">10.0% </label>
+            </div>
+            <div th:if="${product.type} eq 'Insurances'" class="col-xs-6 divide-block">
+                <h4 class=""><a href="#" th:text="${product.name}">Amazon - Echo Dot (3rd Gen) - Smart Speaker with Alexa - Charcoal</a></h4>
+                <label class="control-label">Rating: </label>
+                <label class="info-label" th:text="${product.rating}">Amazon</label>
+                <x class="space"></x>
+                <label class="control-label">Currently Available: </label>
+                <label class="info-label" th:text="${product.quantity}">10.0% </label>
+            </div>
+            <div th:if="${product.type} eq 'Investments'" class="col-xs-6 divide-block">
+                    <h4 class=""><a href="#" th:text="${product.name}">Amazon - Echo Dot (3rd Gen) - Smart Speaker with Alexa - Charcoal</a></h4>
+                    <label class="control-label">Rating: </label>
+                    <label class="info-label" th:text="${product.rating}">Amazon</label>
+                    <x class="space"></x>
+                    <label class="control-label">Currently Available: </label>
+                    <label class="info-label" th:text="${product.quantity}">10.0% </label>
+                </div>
+            <div class="col-xs-1 space-price-block ">
+                <h3 class="price space" th:text="${product.price}">$49.99</h3>
+                <form action="cart?method=addToCart" method="post">
+                    <input type="hidden" name="productid" th:value="${product.productid}">
+                    <input type="hidden" name ="producttype" th:value="${product.type}">
+                    <button class="btn btn-outline-dark" type="submit">Apply</button>
+                </form>
+
+            </div>
+        </div>
+        <hr class="draw-line">
+        <form class="review-form" method="post" action="review?method=storeReviewToMongo">
+            <input type="hidden" name="productId" th:value="${product.productid}">
+            <center><h2 class="form-signin-heading">Write Review About Product</h2></center>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="dark">Product Name:</label>
+                        <input type="text" name="retailername">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="dark">Zip:</label>
+                        <input type="text" name="retailerzip">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="dark">City:</label>
+                        <input type="text" name="retailercity"></div>
+                    <div class="col-md-4">
+                        <label class="dark">State:</label>
+                        <input type="text" name="retailerstate">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="dark">Reviewer Name:</label>
+                        <input type="text" name="reviewername">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="dark">Your Age:</label>
+                        <input type="text" name="reviewerage">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="dark">Gender:</label>
+                        <input type="text" name="reviewergender">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="dark">Occupation:</label>
+                        <input type="text" name="revieweroccupation">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="dark">Comments:</label>
+                <textarea name="review" placeholder="write your review for the product..."></textarea>
+            </div>
+            <div class="form-group">
+                <label class="dark">Ratings:</label>
+                <select name="ratings">
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                </select>
+                <input type="submit" class="btn btn-primary pull-right" name="Submit Review">
+            </div>
+        </form>
+        <div class="container"><center><h2 class="form-signin-heading">Reviews</h2></center></div>
+        <div th:if="${review.size() == 0}">
+            <center>No Review Available.</center>
+        </div>
+        <div th:unless="${review.size() == 0}">
+            <div th:each="r : ${review}">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="dark">Product:</label>
+                        <label th:text="${r.retailername}"></label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="dark">City:</label>
+                        <label th:text="${r.retailercity}"></label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="dark">State:</label>
+                        <label th:text="${r.retailerState}"></label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="dark">Zip:</label>
+                        <label th:text="${r.retailerzip}"></label>
+                    </div>
+                </div>
+                <blockquote th:switch="${r.rating}">
+                    <p th:case=1>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </p>
+                    <p th:case=2>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </p>
+                    <p th:case=3>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </p>
+                    <p th:case=4>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </p>
+                    <p th:case=5>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </p>
+                    <p>Test</p>
+                    <footer class="user-info">
+                        <label th:text="${r.username}"></label>
+                        <cite title="Source Title">
+                            (F) Age: 28 SDE by occupation--Thu Oct 13 23:44:40 CDT 2022
+                            <!--"@{${'static/'+accessory.image}}"-->
+                            <label th:text="@{${'Age: '+r.age+' '+r.occupation+' by occupation--'+r.time}}"></label>
+                        </cite>
+                    </footer>
+                </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .sidebar h4 {
+            padding-bottom: 0;
+            font-size: 18px;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: bold;
+            padding: 7px 7px;
+            /*background-color: #343a40 !important;*/
+            background-color: darkblue !important;
+            text-align: center;
+            border-radius: 15px;
+        }
+        a {
+            color: #212529;
+            background-color: transparent;
+        }
+        .sidebar ul {
+            width: 250px;
+        }
+        .sidebar li ul li a:active {
+            background-color: #007bff;
+            border-radius: 20px;
+        }
+        .sidebar li ul li a:hover {
+            background-color: lightblue;
+            border-radius: 20px;
+        }
+    </style>
+
+    <div id="left" th:include="left :: left"></div>
+
+    <div id="footer" th:include="footer :: footer"></div>
+
+    <script src="static/script/jquery.min.js"></script>
+    <script src="static/script/bootstrap.min.js"></script>
+</body>
+
+</html>

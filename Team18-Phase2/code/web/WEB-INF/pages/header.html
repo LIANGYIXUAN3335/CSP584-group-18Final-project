@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>header</title>
+    <base th:href="@{/}" href="/bestfinance/"/>
+    <style>
+        .search-box {
+            background-color: #f8f9f1 !important;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body onload="init()">
+<script type="text/javascript" src="static/script/autocomplete.js"></script>
+<div th:fragment="header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" th:if="${session.loginUser == null}">
+        <a class="navbar-brand mb-0 h3" href="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BestFinance</a>
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="">Home </a>
+                    <a class="nav-item nav-link active" href="product?method=showProductList&type=Loans">Loans</a>
+                    <a class="nav-item nav-link active" href="product?method=showInsInvProductList&type=Insurances">Insurances</a>
+                    <a class="nav-item nav-link active" href="product?method=showInsInvProductList&type=Investments">Investments</a>
+                    <a class="nav-item nav-link active" href="near-by?method=showMap&type=near-me">Near-Me</a>
+                    <a class="nav-item nav-link active" href="recommend?method=showRecommend&type=recommend">Recommend</a>
+
+                </div>
+            </div>
+        </div>
+        <a href="cart?method=toCartPage" class="nav-item nav-link active">Apply<sub th:if="${session.cart != null}" th:text="${session.cart.totalCount}">3</sub></a>
+        <span class="nav-greeting-dark">Hi There! Welcome.</span>
+        <a class='btn btn-outline-dark my-2 my-sm-2 pull-right' href='user?method=toLoginPage'
+           role='button'>Sign in</a>
+    </nav>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" th:unless="${session.loginUser == null}">
+        <a class="navbar-brand mb-0 h3" href="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BestFinance</a>
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="">Home </a>
+                    <a class="nav-item nav-link active" href="product?method=showProductList&type=Loans">Loans</a>
+                    <a class="nav-item nav-link active" href="product?method=showInsInvProductList&type=Insurances">Insurances</a>
+                    <a class="nav-item nav-link active" href="product?method=showInsInvProductList&type=Investments">Investments</a>
+                    <a class="nav-item nav-link active" href="near-by?method=showMap&type=near-me">Near-Me</a>
+                    <a class="nav-item nav-link active" href="recommend?method=showRecommend&type=recommend">Recommend</a>
+
+                </div>
+            </div>
+        <a href="cart?method=toCartPage" class="nav-item nav-link active">Apply<sub th:if="${session.cart != null}" th:text="${session.cart.totalCount}">(3)</sub></a>
+        <a th:href="@{/user(method='toEditUserPage',id=${session.loginUser.userid})}"><span class="nav-greeting-dark">Hi <b th:text="${session.loginUser.fname}">There</b> Welcome.</span></a>
+        <a class='btn btn-outline-dark my-2 my-sm-2 pull-right' href='user?method=logout'
+           role='button'>Sign out</a>
+        </div>
+    </nav>
+
+    <div class="search-box">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 no-padding">
+                <input
+                        type="text"
+                        id="searchId"
+                        placeholder="Search finance product i.e. J.P. Morgan"
+                        onkeyup="doCompletion()"
+                        class="search-input">
+                <div id="auto-row">
+                    <table
+                            id="complete-table"
+                            class="gridtable"
+                            style="position: absolute; width: 100%"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Best Finance</title>
+    <base th:href="@{/}" href="/bestfinance/"/>
+    <link rel="stylesheet" href="static/css/styles.css" type="text/css" />
+    <link rel="stylesheet" href="static/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="static/css/mystyle.css" type="text/css" />
+</head>
+
+<body>
+<!-- Image and text -->
+<div id="header" th:include="header :: header"></div>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .column {
+        float: left;
+        width: 33.33%;
+        padding: 5px;
+    }
+
+    /* Clearfix (clear floats) */
+    .row::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+</style>
+<div id='body'>
+    <section id='content'>
+        <center><h2>Top Zip Code</h2></center>
+        <table>
+            <tr>
+                <th>Zip Code</th>
+                <th>No. of Product Sold</th>
+            </tr>
+            <!-- Map.Entry<String, Integer> data :zipCode.entrySet() -->
+            <div th:each="zipcodeEntry : ${zipcode.entrySet()}">
+                <tr>
+                    <td th:text="${zipcodeEntry.getKey()}"></td>
+                    <td  th:text="${zipcodeEntry.getValue()}"></td>
+                </tr>
+            </div>
+        </table>
+        <center><h2>Most Liked</h2></center>
+        <table>
+            <tr>
+                <th>Product Name</th>
+                <th>Rating</th>
+            </tr>
+            <!-- Map.Entry<String, Integer> data :zipCode.entrySet() -->
+            <div th:each="mostlikeEntry : ${mostlike.entrySet()}">
+                <tr>
+                    <td th:text="${mostlikeEntry.getKey()}"></td>
+                    <td  th:text="${mostlikeEntry.getValue()}"></td>
+                </tr>
+            </div>
+        </table>
+        <center><h2>Most Sold</h2></center>
+        <table>
+            <tr>
+                <th>mostsoldEntry</th>
+                <th>No. of Items Sold</th>
+            </tr>
+            <!-- Map.Entry<String, Integer> data :zipCode.entrySet() -->
+            <div th:each="mostsoldEntry : ${mostsold.entrySet()}">
+                <tr>
+                    <td th:text="${mostsoldEntry.getKey()}"></td>
+                    <td  th:text="${mostsoldEntry.getValue()}"></td>
+                </tr>
+            </div>
+        </table>
+    </section>
+</div>
+<style>
+    .sidebar h4 {
+        padding-bottom: 0;
+        font-size: 18px;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: bold;
+        padding: 7px 7px;
+        /*background-color: #343a40 !important;*/
+        background-color: darkblue !important;
+        text-align: center;
+        border-radius: 15px;
+    }
+    a {
+        color: #212529;
+        background-color: transparent;
+    }
+    .sidebar ul {
+        width: 250px;
+    }
+    .sidebar li ul li a:active {
+        background-color: #007bff;
+        border-radius: 20px;
+    }
+    .sidebar li ul li a:hover {
+        background-color: lightblue;
+        border-radius: 20px;
+    }
+</style>
+
+<div id="left" th:include="left :: left"></div>
+
+<div id="footer" th:include="footer :: footer"></div>
+
+<script src="static/script/jquery.min.js"></script>
+<script src="static/script/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $('.carousel').carousel();
+    $("select#delivery").change(function(){
+        if ($(this).val() === '1') {
+            $("#picklocation").prop("hidden","")
+        } else {
+            $("#picklocation").attr("hidden","hidden")
+        }
+    });
+</script>
+
+</body>
+
+</html>
+
